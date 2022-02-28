@@ -23,8 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post(uri: '/balance',action: [BalanceController::class, 'show']);
 
-Route::post(uri: '/event',action: [EventController::class, 'store']);
-
 Route::post(uri: '/deposit',action: [EventController::class, 'deposit']);
 
 Route::post(uri: '/create-account',action: [EventController::class, 'crearUsuario']);

@@ -12,12 +12,6 @@ use App\Models\User;
 
 class EventController extends Controller
 {
-    public function store(Request $request){
-        if ($request->input('event') == 'deposit') {
-            $this->deposit($request->input('name'), $request->input('creditos'));
-        }
-    }
-
     public function deposit(Request $request){
         //realizar un deposito de los creditos para realizar una recarga
         //ingresar el nombre del usuario y la cantidad de creditos en la opcion "body" de postman
@@ -43,7 +37,7 @@ class EventController extends Controller
             'message' => 'Usuario creado con exito',
             'user' => $user
         ]);
-        
+
     }
 
     public function  recarga(Request $request){
