@@ -1,9 +1,9 @@
 # api-recargas
 link api: https://api-recargas.herokuapp.com/
 
-##Documentacion
+## Documentacion
 
-###Seccion Usuario
+### Seccion Usuario
 
 * crear Usuario
 
@@ -42,7 +42,7 @@ El request debe de contener los siquientes parametros
     "creditos": (cantidad de creditos a depositar, en numero y sin comillas)
 }
 ```
-###Seccion Recarga
+### Seccion Recarga
 * Realizar recarga
 
 En la siguiente ruta es la que se usa para realizar la recarga:
