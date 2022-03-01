@@ -3,6 +3,8 @@ link api: https://api-recargas.herokuapp.com/
 
 ## Documentacion
 
+link de coumentacion en swagger: https://app.swaggerhub.com/apis-docs/api-recargas/api-recarga/1.0.0/
+
 ### Seccion Usuario
 
 * crear Usuario
