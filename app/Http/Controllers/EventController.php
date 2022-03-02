@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DepositRequest;
+use App\Http\Requests\RecargaRequest;
+use App\Http\Requests\UserRequest;
 use App\Models\Recarga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,11 +15,11 @@ use App\Models\User;
 
 class EventController extends Controller
 {
-    public function deposit(Request $request){
-        //*verificado 
+    public function deposit(DepositRequest $request){
+        //*verificado
         //realizar un deposito de los creditos para realizar una recarga
         //ingresar el nombre del usuario y la cantidad de creditos en la opcion "body" de postman
-        
+
         $creditos = $request->input('creditos');
         $name = $request->input('name');
         if (is_string($name) && is_numeric($creditos)) {
@@ -40,7 +43,7 @@ class EventController extends Controller
                     'message' => 'No se puede realizar una recarga con valor negativo'
                 ], 400);
             }
-            
+
         }elseif (is_numeric($name)) {
             return response()->json([
                 'message' => 'El nombre debe ser una cadena de caracteres'
@@ -54,11 +57,11 @@ class EventController extends Controller
                 'message' => 'Los datos ingresados no son validos'
             ], 405);
         }
-        
+
     }
 
-    public function crearUsuario(Request $request){
-        //*verificado
+    public function crearUsuario(UserRequest $request){
+        //-verificado
         //guardar nuevo usuario en la base de datos
         //ingresar los datos en la opcion "body" de postman
         $name = $request->input('name');
@@ -93,7 +96,7 @@ class EventController extends Controller
 
     }
 
-    public function  recarga(Request $request){
+    public function  recarga(RecargaRequest $request){
         //*verificado
         //se realiza una recarga telefonica
         //ingresar el nombre del usuario y la cantidad de creditos en la opcion "body" de postman
@@ -151,5 +154,5 @@ class EventController extends Controller
             ], 405);
         }
     }
-    
+
 }

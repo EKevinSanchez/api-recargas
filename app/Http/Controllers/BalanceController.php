@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 
 class BalanceController extends Controller
 {
-    public function show(Request $request)
+    public function show(UserRequest $request)
     {
         // chequear si el usuario es una cadena de caracteres
         $name = $request->input('name');
@@ -36,8 +37,8 @@ class BalanceController extends Controller
                 'message' => 'Los datos ingresados no son validos'
             ], 400);
         }
-        
-        
+
+
 
 
     }
