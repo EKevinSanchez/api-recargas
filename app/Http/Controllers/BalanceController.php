@@ -25,7 +25,7 @@ class BalanceController extends Controller
             } else {
                 return response()->json([
                     'message' => 'No existe el usuario'
-                ]);
+                ], 404);
             }
         } elseif (is_numeric($name)) {
             return response()->json([

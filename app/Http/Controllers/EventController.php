@@ -26,12 +26,14 @@ class EventController extends Controller
                     $user->creditos = $user->creditos + $creditos;
                     $user->save();
                     return response()->json([
-                        'message' => 'Deposito realizado con exito'
+                        'message' => 'Deposito realizado con exito',
+                        'cuenta' => $user->name,
+                        'creditos' => $user->creditos
                     ]);
                 } else {
                     return response()->json([
                         'message' => 'No existe el usuario'
-                    ]);
+                    ], 404);
                 }
             }else{
                 return response()->json([
@@ -50,7 +52,7 @@ class EventController extends Controller
         }else{
             return response()->json([
                 'message' => 'Los datos ingresados no son validos'
-            ], 400);
+            ], 405);
         }
         
     }
@@ -65,7 +67,7 @@ class EventController extends Controller
             if ($existe) {
                 return response()->json([
                     'message' => 'El usuario ya existe'
-                ], 400);
+                ], 219);
             }else{
                 DB::transaction(function () use ($user, $request) {
                     $user = new User();
@@ -85,7 +87,7 @@ class EventController extends Controller
         }else{
             return response()->json([
                 'message' => 'Los datos ingresados no son validos'
-            ], 400);
+            ], 405);
         }
 
 
@@ -98,7 +100,7 @@ class EventController extends Controller
         $name = $request->input('name');
         $numero = $request->input('numero');
         $creditos = $request->input('creditos');
-        if (is_string($name) && is_numeric($creditos) && is_string($numero)) {
+        if (is_string($name) && is_numeric($creditos) && is_numeric($numero)) {
             $user = User::where('name', $request->input('name'))->first();
             //verificar si existe el usuario
             if($user){
@@ -121,15 +123,20 @@ class EventController extends Controller
                     $recarga = Recarga::orderBy('id', 'desc')->first();
                     return response()->json([
                         'message' => 'Recarga realizada con exito',
-                        'user' => $user,
-                        'recarga' => $recarga
+                        'nombre' => $recarga->usuario,
+                        'numero' => $recarga->numero,
+                        'cantidad' => $recarga->cantidad
                     ]);
                 }
             }else {
                 return response()->json([
                     'message' => 'Usuario no existe'
-                ]);
+                ], 404);
             }
+        }elseif(is_string($numero)){
+            return response()->json([
+                'message' => 'El numero debe ser una cadena de numeros'
+            ], 400);
         }elseif (is_numeric($name)) {
             return response()->json([
                 'message' => 'El nombre debe ser una cadena de caracteres'
@@ -138,14 +145,10 @@ class EventController extends Controller
             return response()->json([
                 'message' => 'Los creditos deben ser un numero'
             ], 400);
-        }elseif(is_numeric($numero)){
-            return response()->json([
-                'message' => 'El numero debe ser una cadena de caracteres'
-            ], 400);
         }else{
             return response()->json([
                 'message' => 'Los datos ingresados no son validos'
-            ], 400);
+            ], 405);
         }
     }
     
